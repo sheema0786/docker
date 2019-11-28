@@ -25,11 +25,11 @@ script:
   
   
   #initially there will no driectory in the s3 bucket. After first push, it will be created. The directory is of the same name as the app name
-  bucker_path: "docker-react"
-  access_key_id:
-    secure: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
+  # bucker_path: "docker-react"
+  # access_key_id:
+    # secure: $AWS_ACCESS_KEY
+  # secret_access_key:
+    # secure: $AWS_SECRET_KEY
   # doploy only when code is murged or commit on master branch
-  on:
-    branch: master
+  # on:
+    # branch: master
