@@ -16,12 +16,14 @@ script:
   - docker run -e CI=true atiffarrukh/docker-react npm run test
 
 # deploy it off to AWS Beanstalk
-deploy:
-  provider: elasticbeanstalk
-  regions: "us-east-1"
-  app: "docker-react"
-  env: "DockerReact-env"
-  bucket_name: "elasticbeanstalk-us-east-1-978974151162"
+# deploy:
+  # provider: elasticbeanstalk
+  # regions: "us-east-1"
+  # app: "docker-react"
+  # env: "DockerReact-env"
+  # bucket_name: "elasticbeanstalk-us-east-1-978974151162"
+  
+  
   #initially there will no driectory in the s3 bucket. After first push, it will be created. The directory is of the same name as the app name
   bucker_path: "docker-react"
   access_key_id:
