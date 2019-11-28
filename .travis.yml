@@ -9,11 +9,11 @@ services:
 
 # The list of commands needed before installing
 before_install:
-  - docker build -t atiffarrukh/docker-react -f Dockerfile.dev .
+  - docker build -t sheema0786/docker -f Dockerfile.dev .
 
 # used to run tests
 script:
-  - docker run -e CI=true atiffarrukh/docker-react npm run test
+  - docker run -e CI=true sheema0786/docker npm run test
 
 # deploy it off to AWS Beanstalk
 # deploy:
