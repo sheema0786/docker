@@ -1,0 +1,14 @@
+# Create a simple ruby project, host it on the Github. Create a branch named "features". All the development will be done there.
+# Push the changes to "features" branch, create a Pull Request. Travis CI will run test. If tests are passed, the code will be 
+# pushed into AWS Elastic Beanstalk
+# This file is the "dev" part of the complete workflow
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD [ "npm", "run", "start" ]

@@ -1,0 +1,33 @@
+# This the yml configuration file for Travis to run tests on docker-react project and if it pass then push it to AWS
+# As our porject is built in docker, we need to have docker pre-installed in our Travis system and docker needs sudo access
+language: generic
+sudo: required
+
+# the services that Travis needs to run this project
+services:
+  - docker
+
+# The list of commands needed before installing
+before_install:
+  - docker build -t atiffarrukh/docker-react -f Dockerfile.dev .
+
+# used to run tests
+script:
+  - docker run -e CI=true atiffarrukh/docker-react npm run test
+
+# deploy it off to AWS Beanstalk
+deploy:
+  provider: elasticbeanstalk
+  regions: "us-east-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-978974151162"
+  #initially there will no driectory in the s3 bucket. After first push, it will be created. The directory is of the same name as the app name
+  bucker_path: "docker-react"
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
+  # doploy only when code is murged or commit on master branch
+  on:
+    branch: master

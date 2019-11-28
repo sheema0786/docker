@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web-dev:
+    # since we have a custom named Dockerfile. 
+    build: 
+      # we first specify the context ie the location of project files.
+      context: .
+      # now we speficify the Dockerfile
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4000:3000"
+    # create volumes for the specified container
+    volumes:
+      # do not map this directory to any other directory. Equivalent of -v /app/node_modules
+      - /app/node_modules
+      # map the current system directory to container directoy /app. Equivalent of -v $(pwd):/app
+      - .:/app
+  # create a service for running the tests on the react project
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # overriding the initial command
+    command: ["npm", "run", "test"]
